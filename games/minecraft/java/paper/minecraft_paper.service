@@ -1,0 +1,17 @@
+[Unit]
+Description=Minecraft Paper Server
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/minecraft/paper
+User=minecraft
+Group=minecraft
+
+ExecStart=/usr/bin/screen -L -Logfile run.log -DmS mc-%i /opt/minecraft/.jabba/jdk/openjdk@1.16.0/bin/java -Xmx1024M -Xms1024M -jar server.jar nogui
+ExecStop=/usr/bin/screen -p 0 -S mc-%i -X eval 'stuff "stop"\015'
+
+Restart=on-failure
+RestartSec=60s
+
+[Install]
+WantedBy=multi-user.target

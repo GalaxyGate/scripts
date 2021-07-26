@@ -1,0 +1,15 @@
+[Unit]
+Description=Hastebin Server
+After=multi-user.target
+
+[Service]
+WorkingDirectory=/opt/hastebin
+User=hastebin
+Group=hastebin
+ExecStart=/usr/bin/node server.js
+Type=simple
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
